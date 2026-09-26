@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+  <title id="title">AffordanceGrasp-R1 radar comparison</title>
+  <desc id="desc">Two radar charts compare AffordanceGrasp-R1 and AffordanceNet using gIoU and cIoU across eight benchmark subsets.</desc>
+  <rect width="1200" height="500" fill="white"/>
+  <style>
+    .grid{fill:none;stroke:#cfd4da;stroke-width:1;stroke-dasharray:2 3}
+    .outer{fill:none;stroke:#111;stroke-width:2}
+    .axis{stroke:#d7dbe0;stroke-width:1;stroke-dasharray:2 3}
+    .label{font:600 17px Georgia,serif;fill:#111;text-anchor:middle}
+    .panel{font:700 21px Georgia,serif;fill:#111;text-anchor:middle}
+    .ours{fill:none;stroke:#df2f2f;stroke-width:4;stroke-linejoin:round}
+    .base{fill:none;stroke:#247db6;stroke-width:3.5;stroke-dasharray:12 5 2 5;stroke-linejoin:round}
+    .dot{fill:white;stroke:#df2f2f;stroke-width:3}
+    .value{font:700 17px Georgia,serif;fill:#df2f2f;text-anchor:middle}
+    .legend{font:20px Georgia,serif;fill:#111}
+  </style>
+
+  <g transform="translate(415 22)">
+    <line x1="0" y1="0" x2="54" y2="0" stroke="#df2f2f" stroke-width="4"/>
+    <circle cx="27" cy="0" r="7" fill="white" stroke="#df2f2f" stroke-width="3"/>
+    <text class="legend" x="68" y="7">Ours</text>
+    <line x1="195" y1="0" x2="249" y2="0" stroke="#247db6" stroke-width="3.5" stroke-dasharray="12 5 2 5"/>
+    <text class="legend" x="263" y="7">AffordanceNet</text>
+  </g>
+
+  <g aria-label="gIoU radar chart">
+    <polygon class="outer" points="300,75 413.1,121.9 460,235 413.1,348.1 300,395 186.9,348.1 140,235 186.9,121.9"/>
+    <polygon class="grid" points="300,115 384.9,150.1 420,235 384.9,319.9 300,355 215.1,319.9 180,235 215.1,150.1"/>
+    <polygon class="grid" points="300,155 356.6,178.4 380,235 356.6,291.6 300,315 243.4,291.6 220,235 243.4,178.4"/>
+    <polygon class="grid" points="300,195 328.3,206.7 340,235 328.3,263.3 300,275 271.7,263.3 260,235 271.7,206.7"/>
+    <line class="axis" x1="300" y1="235" x2="300" y2="75"/><line class="axis" x1="300" y1="235" x2="413.1" y2="121.9"/>
+    <line class="axis" x1="300" y1="235" x2="460" y2="235"/><line class="axis" x1="300" y1="235" x2="413.1" y2="348.1"/>
+    <line class="axis" x1="300" y1="235" x2="300" y2="395"/><line class="axis" x1="300" y1="235" x2="186.9" y2="348.1"/>
+    <line class="axis" x1="300" y1="235" x2="140" y2="235"/><line class="axis" x1="300" y1="235" x2="186.9" y2="121.9"/>
+    <polygon class="base" points="300,108.4 385.6,149.4 420.6,235 353.9,288.9 300,351.4 217.6,317.4 225.2,235 235.5,170.5"/>
+    <polygon class="ours" points="300,91 393.3,141.7 431.2,235 400,335 300,365.6 206.5,328.5 159.8,235 215.6,150.6"/>
+    <g><circle class="dot" cx="300" cy="91" r="5"/><circle class="dot" cx="393.3" cy="141.7" r="5"/><circle class="dot" cx="431.2" cy="235" r="5"/><circle class="dot" cx="400" cy="335" r="5"/><circle class="dot" cx="300" cy="365.6" r="5"/><circle class="dot" cx="206.5" cy="328.5" r="5"/><circle class="dot" cx="159.8" cy="235" r="5"/><circle class="dot" cx="215.6" cy="150.6" r="5"/></g>
+    <text class="value" x="300" y="84">72.0</text><text class="value" x="414" y="139">66.0</text><text class="value" x="450" y="258">65.6</text><text class="value" x="421" y="350">70.7</text>
+    <text class="value" x="300" y="389">65.3</text><text class="value" x="184" y="350">66.1</text><text class="value" x="160" y="215">70.1</text><text class="value" x="193" y="145">59.7</text>
+    <text class="label" x="300" y="55">GraspNet-seen</text><text class="label" x="447" y="112">HANDAL&#8224;</text><text class="label" x="500" y="241">HANDAL</text>
+    <text class="label" x="454" y="374">3DOI-easy</text><text class="label" x="300" y="427">HANDAL&#8224;-hard</text><text class="label" x="146" y="374">HANDAL&#8224;-easy</text>
+    <text class="label" x="97" y="241">3DOI</text><text class="label" x="151" y="112">GraspNet-novel</text>
+    <text class="panel" x="300" y="475">(a) gIoU</text>
+  </g>
+
+  <g aria-label="cIoU radar chart">
+    <polygon class="outer" points="900,75 1013.1,121.9 1060,235 1013.1,348.1 900,395 786.9,348.1 740,235 786.9,121.9"/>
+    <polygon class="grid" points="900,115 984.9,150.1 1020,235 984.9,319.9 900,355 815.1,319.9 780,235 815.1,150.1"/>
+    <polygon class="grid" points="900,155 956.6,178.4 980,235 956.6,291.6 900,315 843.4,291.6 820,235 843.4,178.4"/>
+    <polygon class="grid" points="900,195 928.3,206.7 940,235 928.3,263.3 900,275 871.7,263.3 860,235 871.7,206.7"/>
+    <line class="axis" x1="900" y1="235" x2="900" y2="75"/><line class="axis" x1="900" y1="235" x2="1013.1" y2="121.9"/>
+    <line class="axis" x1="900" y1="235" x2="1060" y2="235"/><line class="axis" x1="900" y1="235" x2="1013.1" y2="348.1"/>
+    <line class="axis" x1="900" y1="235" x2="900" y2="395"/><line class="axis" x1="900" y1="235" x2="786.9" y2="348.1"/>
+    <line class="axis" x1="900" y1="235" x2="740" y2="235"/><line class="axis" x1="900" y1="235" x2="786.9" y2="121.9"/>
+    <polygon class="base" points="900,107 985.3,149.7 1021.6,235 955.7,290.7 900,350.6 817.8,317.2 825.2,235 853.1,188.1"/>
+    <polygon class="ours" points="900,96.6 995.2,139.8 1032,235 1003.5,338.5 900,365.6 804.7,330.3 750,235 826.6,161.6"/>
+    <g><circle class="dot" cx="900" cy="96.6" r="5"/><circle class="dot" cx="995.2" cy="139.8" r="5"/><circle class="dot" cx="1032" cy="235" r="5"/><circle class="dot" cx="1003.5" cy="338.5" r="5"/><circle class="dot" cx="900" cy="365.6" r="5"/><circle class="dot" cx="804.7" cy="330.3" r="5"/><circle class="dot" cx="750" cy="235" r="5"/><circle class="dot" cx="826.6" cy="161.6" r="5"/></g>
+    <text class="value" x="900" y="89">69.2</text><text class="value" x="1016" y="137">67.3</text><text class="value" x="1050" y="258">66.0</text><text class="value" x="1024" y="353">73.2</text>
+    <text class="value" x="900" y="389">65.3</text><text class="value" x="782" y="352">67.4</text><text class="value" x="750" y="215">75.0</text><text class="value" x="806" y="156">51.9</text>
+    <text class="label" x="900" y="55">GraspNet-seen</text><text class="label" x="1047" y="112">HANDAL&#8224;</text><text class="label" x="1100" y="241">HANDAL</text>
+    <text class="label" x="1054" y="374">3DOI-easy</text><text class="label" x="900" y="427">HANDAL&#8224;-hard</text><text class="label" x="746" y="374">HANDAL&#8224;-easy</text>
+    <text class="label" x="697" y="241">3DOI</text><text class="label" x="751" y="112">GraspNet-novel</text>
+    <text class="panel" x="900" y="475">(b) cIoU</text>
+  </g>
+</svg>

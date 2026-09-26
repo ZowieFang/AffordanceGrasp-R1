@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AffordanceGrasp-R1: reasoning-driven affordance segmentation for robotic grasping." />
+  <title>AffordanceGrasp-R1</title>
+  <link rel="stylesheet" href="static/css/index.css" />
+</head>
+<body>
+  <header class="site-nav">
+    <a class="brand" href="#top">AffordanceGrasp-R1</a>
+    <nav aria-label="Page navigation">
+      <a href="#abstract">Abstract</a>
+      <a href="#framework">Framework</a>
+      <a href="#experiments">Experiments</a>
+      <a href="#robot">Robot</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <p class="eyebrow">Reasoning &middot; Affordance &middot; 6-DoF Grasping</p>
+        <h1>AffordanceGrasp-R1</h1>
+        <p class="subtitle">Leveraging Reasoning-Based Affordance Segmentation<br class="desktop" /> with Reinforcement Learning for Robotic Grasping</p>
+
+        <div class="links" aria-label="Project links">
+          <a class="pill" href="https://arxiv.org/abs/2602.03547" target="_blank" rel="noreferrer"><span>arXiv</span><b>2602.03547</b></a>
+          <a class="pill" href="static/pdf/AffordanceGraspR1_ICML2026.pdf" target="_blank"><span>PDF</span><b>Paper</b></a>
+          <span class="pill pill-muted" aria-label="Code coming soon"><span>Code</span><b>Coming soon</b></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="showcase" aria-label="Performance comparison">
+      <div class="wide-wrap">
+        <figure class="radar-figure">
+          <img src="static/images/radar_comparison.svg" alt="Radar-chart comparison between AffordanceGrasp-R1 and AffordanceNet" />
+        </figure>
+        <p class="radar-caption">The radar charts compare AffordanceGrasp-R1 with AffordanceNet across eight benchmark subsets using gIoU and cIoU. AffordanceGrasp-R1 consistently achieves stronger performance, with particularly clear gains on 3DOI and GraspNet-novel, demonstrating improved reasoning-based affordance grounding and generalization to challenging scenes.</p>
+      </div>
+    </section>
+
+    <section class="section" id="abstract">
+      <div class="wrap prose-wrap">
+        <h2>Abstract</h2>
+        <p class="abstract-text">Affordance segmentation is crucial for bridging visual perception and robotic manipulation, yet existing Vision–Language Models (VLMs) struggle to align 3D object geometry with the semantic intent of complex grasping instructions due to limited structured reasoning capabilities. We introduce AffordanceGrasp-R1, a reasoning-driven affordance segmentation framework for robotic grasping that combines a chain-of-thought (CoT) cold-start strategy with reinforcement learning to enhance deduction and spatial grounding. In addition, we redesign the grasping pipeline to be more context-aware by generating grasp candidates from the global scene point cloud and subsequently filtering them using instruction-conditioned affordance masks. Extensive experiments demonstrate that AffordanceGrasp-R1 consistently outperforms state-of-the-art (SOTA) methods on benchmark datasets, and real-world robotic grasping evaluations further validate its robustness and generalization under complex language-conditioned manipulation scenarios.</p>
+      </div>
+    </section>
+
+    <section class="section section-tint" id="framework">
+      <div class="wrap">
+        <h2>Framework</h2>
+        <figure class="paper-card figure-wide">
+          <img
+            src="https://arxiv.org/html/2602.03547v1/overview.png"
+            data-fallback="static/images/framework_clean.png"
+            alt="Overview of the AffordanceGrasp-R1 framework"
+          />
+          <figcaption class="framework-caption">The framework consists of three modules. First, the MLLM is initialized with Chain-of-Thought cold-start data and further optimized with reinforcement learning to produce a reasoning process together with a bounding box and point prompt. These spatial prompts guide the LoRA-adapted SAM 2 segmentation module to generate an instruction-conditioned affordance mask. Finally, the grasping module generates 6-DoF candidates from the full-scene point cloud and selects the optimal pose through mask-guided filtering and 3D IoU matching.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="experiments">
+      <div class="wrap">
+        <h2>Experimental Results</h2>
+        <p class="section-lead">The model is evaluated across HANDAL, GraspNet, and 3DOI, including unseen objects and queries that require functional reasoning about object parts.</p>
+
+        <div class="figure-stack">
+          <figure class="paper-card">
+            <div class="figure-label">Main subsets</div>
+            <img
+              src="https://arxiv.org/html/2602.03547v1/Visual_affgrasp_r1_new.png"
+              data-fallback="static/images/reasoning_compare.png"
+              alt="Qualitative comparison on the main affordance segmentation subsets"
+            />
+            <figcaption>Qualitative comparison on the main affordance segmentation subsets.</figcaption>
+          </figure>
+          <figure class="paper-card">
+            <div class="figure-label">Reasoning subsets</div>
+            <img
+              src="https://arxiv.org/html/2602.03547v1/reasoning_Visual_affgrasp_r1_new.png"
+              data-fallback="static/images/reasoning_compare.png"
+              alt="Qualitative comparison on reasoning-based affordance segmentation subsets"
+            />
+            <figcaption>AffordanceGrasp-R1 maintains sharper functional grounding under compositional instructions.</figcaption>
+          </figure>
+          <figure class="paper-card">
+            <div class="figure-label">Easy and hard prompts</div>
+            <img
+              src="https://arxiv.org/html/2602.03547v1/easy_hard_reasoning.png"
+              data-fallback="static/images/reasoning_examples.png"
+              alt="Easy and hard reasoning-based instruction examples"
+            />
+            <figcaption>Representative image-instruction pairs used in the real-world evaluation.</figcaption>
+          </figure>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section robot-section" id="robot">
+      <div class="wrap">
+        <h2>Real-World Experiments</h2>
+        <p class="section-lead">Zero-shot experiments use a KUKA LBR iiwa R820, a Robotiq 2F-85 gripper, and an eye-in-hand Intel RealSense D455 camera.</p>
+
+        <div class="video-category-list" aria-label="Real-robot video gallery">
+          <article class="video-category">
+            <h3><span>01</span> Banana</h3>
+            <div class="context-grid">
+              <article class="video-card" data-video-card><div class="video-media"><video controls loop muted playsinline preload="metadata" aria-label="Banana easy instruction"><source src="static/真机视频_web/banana_easy.mp4" type="video/mp4" /></video><span class="video-status">banana_easy.mp4</span></div><div class="video-copy"><span>Banana &middot; Easy</span><p><b>Instruction:</b> I want a banana.</p></div></article>
+              <article class="video-card" data-video-card><div class="video-media"><video controls loop muted playsinline preload="metadata" aria-label="Banana hard instruction"><source src="static/真机视频_web/banana_hard.mp4" type="video/mp4" /></video><span class="video-status">banana_hard.mp4</span></div><div class="video-copy"><span>Banana &middot; Hard</span><p><b>Instruction:</b> I need a healthy snack.</p></div></article>
+            </div>
+          </article>
+
+          <article class="video-category">
+            <h3><span>02</span> Can</h3>
+            <div class="context-grid">
+              <article class="video-card" data-video-card><div class="video-media"><video controls loop muted playsinline preload="metadata" aria-label="Can easy instruction"><source src="static/真机视频_web/cococola_easy.mp4" type="video/mp4" /></video><span class="video-status">can_easy.mp4</span></div><div class="video-copy"><span>Can &middot; Easy</span><p><b>Instruction:</b> I want a can.</p></div></article>
+              <article class="video-card" data-video-card><div class="video-media"><video controls loop muted playsinline preload="metadata" aria-label="Can hard instruction"><source src="static/真机视频_web/cococola_hard.mp4" type="video/mp4" /></video><span class="video-status">can_hard.mp4</span></div><div class="video-copy"><span>Can &middot; Hard</span><p><b>Instruction:</b> I am thirsty. What can I drink?</p></div></article>
+            </div>
+          </article>
+
+          <article class="video-category">
+            <h3><span>03</span> Screwdriver</h3>
+            <div class="context-grid">
+              <article class="video-card" data-video-card><div class="video-media"><video controls loop muted playsinline preload="metadata" aria-label="Screwdriver easy instruction"><source src="static/真机视频_web/screwdriver_easy.mp4" type="video/mp4" /></video><span class="video-status">screwdriver_easy.mp4</span></div><div class="video-copy"><span>Screwdriver &middot; Easy</span><p><b>Instruction:</b> I need a screwdriver.</p></div></article>
+              <article class="video-card" data-video-card><div class="video-media"><video controls loop muted playsinline preload="metadata" aria-label="Screwdriver hard instruction"><source src="static/真机视频_web/screwdriver_hard.mp4" type="video/mp4" /></video><span class="video-status">screwdriver_hard.mp4</span></div><div class="video-copy"><span>Screwdriver &middot; Hard</span><p><b>Instruction:</b> What can I use to tighten the screw?</p></div></article>
+            </div>
+          </article>
+
+          <article class="video-category">
+            <h3><span>04</span> Hammer</h3>
+            <div class="context-grid">
+              <article class="video-card" data-video-card><div class="video-media"><video controls loop muted playsinline preload="metadata" aria-label="Hammer easy instruction"><source src="static/真机视频_web/hammer_easy.mp4" type="video/mp4" /></video><span class="video-status">hammer_easy.mp4</span></div><div class="video-copy"><span>Hammer &middot; Easy</span><p><b>Instruction:</b> I want a hammer.</p></div></article>
+              <article class="video-card" data-video-card><div class="video-media"><video controls loop muted playsinline preload="metadata" aria-label="Hammer hard instruction"><source src="static/真机视频_web/hammer_hard.mp4" type="video/mp4" /></video><span class="video-status">hammer_hard.mp4</span></div><div class="video-copy"><span>Hammer &middot; Hard</span><p><b>Instruction:</b> I need to drive a nail.</p></div></article>
+            </div>
+          </article>
+
+          <article class="video-category">
+            <h3><span>05</span> Pot</h3>
+            <div class="context-grid">
+              <article class="video-card" data-video-card><div class="video-media"><video controls loop muted playsinline preload="metadata" aria-label="Pot easy instruction"><source src="static/真机视频_web/pot_easy.mp4" type="video/mp4" /></video><span class="video-status">pot_easy.mp4</span></div><div class="video-copy"><span>Pot &middot; Easy</span><p><b>Instruction:</b> I need a pot.</p></div></article>
+              <article class="video-card" data-video-card><div class="video-media"><video controls loop muted playsinline preload="metadata" aria-label="Pot hard instruction"><source src="static/真机视频_web/pot_hard.mp4" type="video/mp4" /></video><span class="video-status">pot_hard.mp4</span></div><div class="video-copy"><span>Pot &middot; Hard</span><p><b>Instruction:</b> I want to cook. What can you give me?</p></div></article>
+            </div>
+          </article>
+
+          <article class="video-category">
+            <h3><span>06</span> Mouse</h3>
+            <div class="context-grid">
+              <article class="video-card" data-video-card><div class="video-media"><video controls loop muted playsinline preload="metadata" aria-label="Mouse easy instruction"><source src="static/真机视频_web/mouse_easy.mp4" type="video/mp4" /></video><span class="video-status">mouse_easy.mp4</span></div><div class="video-copy"><span>Mouse &middot; Easy</span><p><b>Instruction:</b> Give me the mouse.</p></div></article>
+              <article class="video-card" data-video-card><div class="video-media"><video controls loop muted playsinline preload="metadata" aria-label="Mouse hard instruction"><source src="static/真机视频_web/mouse_hard.mp4" type="video/mp4" /></video><span class="video-status">mouse_hard.mp4</span></div><div class="video-copy"><span>Mouse &middot; Hard</span><p><b>Instruction:</b> What can I use to control the cursor?</p></div></article>
+            </div>
+          </article>
+
+          <article class="video-category">
+            <h3><span>07</span> Ball</h3>
+            <div class="context-grid">
+              <article class="video-card" data-video-card><div class="video-media"><video controls loop muted playsinline preload="metadata" aria-label="Ball easy instruction"><source src="static/真机视频_web/circle_easy.mp4" type="video/mp4" /></video><span class="video-status">circle_easy.mp4</span></div><div class="video-copy"><span>Ball &middot; Easy</span><p><b>Instruction:</b> Hand me the ball.</p></div></article>
+              <article class="video-card" data-video-card><div class="video-media"><video controls loop muted playsinline preload="metadata" aria-label="Ball hard instruction"><source src="static/真机视频_web/circle_hard.mp4" type="video/mp4" /></video><span class="video-status">circle_hard.mp4</span></div><div class="video-copy"><span>Ball &middot; Hard</span><p><b>Instruction:</b> Give me something round to play with.</p></div></article>
+            </div>
+          </article>
+
+          <article class="video-category">
+            <h3><span>08</span> Scoop</h3>
+            <div class="context-grid">
+              <article class="video-card" data-video-card><div class="video-media"><video controls loop muted playsinline preload="metadata" aria-label="Scoop easy instruction"><source src="static/真机视频_web/scoop_easy.mp4" type="video/mp4" /></video><span class="video-status">scoop_easy.mp4</span></div><div class="video-copy"><span>Scoop &middot; Easy</span><p><b>Instruction:</b> I want a scoop.</p></div></article>
+              <article class="video-card" data-video-card><div class="video-media"><video controls loop muted playsinline preload="metadata" aria-label="Scoop hard instruction"><source src="static/真机视频_web/scoop_hard.mp4" type="video/mp4" /></video><span class="video-status">scoop_hard.mp4</span></div><div class="video-copy"><span>Scoop &middot; Hard</span><p><b>Instruction:</b> We need to serve soup. What can I use?</p></div></article>
+            </div>
+          </article>
+
+          <article class="video-category">
+            <h3><span>09</span> Knife</h3>
+            <div class="context-grid">
+              <article class="video-card" data-video-card><div class="video-media"><video controls loop muted playsinline preload="metadata" aria-label="Knife easy instruction"><source src="static/真机视频_web/knife_easy.mp4" type="video/mp4" /></video><span class="video-status">knife_easy.mp4</span></div><div class="video-copy"><span>Knife &middot; Easy</span><p><b>Instruction:</b> Hand me the knife.</p></div></article>
+              <article class="video-card" data-video-card><div class="video-media"><video controls loop muted playsinline preload="metadata" aria-label="Knife hard instruction"><source src="static/真机视频_web/knife_hard.mp4" type="video/mp4" /></video><span class="video-status">knife_hard.mp4</span></div><div class="video-copy"><span>Knife &middot; Hard</span><p><b>Instruction:</b> What can I use to cut food?</p></div></article>
+            </div>
+          </article>
+
+          <article class="video-category">
+            <h3><span>10</span> Glove</h3>
+            <div class="context-grid">
+              <article class="video-card" data-video-card><div class="video-media"><video controls loop muted playsinline preload="metadata" aria-label="Glove easy instruction"><source src="static/真机视频_web/glove_easy.mp4" type="video/mp4" /></video><span class="video-status">glove_easy.mp4</span></div><div class="video-copy"><span>Glove &middot; Easy</span><p><b>Instruction:</b> Hand me the glove.</p></div></article>
+              <article class="video-card" data-video-card><div class="video-media"><video controls loop muted playsinline preload="metadata" aria-label="Glove hard instruction"><source src="static/真机视频_web/glove_hard.mp4" type="video/mp4" /></video><span class="video-status">glove_hard.mp4</span></div><div class="video-copy"><span>Glove &middot; Hard</span><p><b>Instruction:</b> What can protect my hand?</p></div></article>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section citation-section" id="citation">
+      <div class="wrap prose-wrap">
+        <h2>BibTeX</h2>
+        <div class="bib">
+<pre id="bibtex">@article{zhou2026affordancegraspr1,
+  title   = {AffordanceGrasp-R1: Leveraging Reasoning-Based Affordance Segmentation with Reinforcement Learning for Robotic Grasping},
+  author  = {Zhou, Dingyi and He, Mu and Fang, Zhuowei and Yao, Xiangtong and Liu, Yinlong and Knoll, Alois and Cao, Hu},
+  journal = {arXiv preprint arXiv:2602.03547},
+  year    = {2026}
+}</pre>
+          <button id="copyBtn" type="button">Copy</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap">AffordanceGrasp-R1 &middot; Project Page</div></footer>
+  <script src="static/js/index.js"></script>
+</body>
+</html>

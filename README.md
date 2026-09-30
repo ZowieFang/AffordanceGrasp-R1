@@ -18,7 +18,7 @@ then visit `http://localhost:8000`.
 - `static/images/`: paper figures and robot rollout images
 - `static/真机视频_web/`: 20 browser-optimized H.264 real-robot videos
 - `static/真机视频/`: original videos (archive only; not used by the page)
-- `static/pdf/AffordanceGraspR1_ICML2026.pdf`: local paper PDF
+- `static/pdf/AffordanceGraspR1_TRO2026.pdf`: latest local paper PDF
 
 ## Before publishing
 The page uses high-resolution figures served by the paper's arXiv HTML page and

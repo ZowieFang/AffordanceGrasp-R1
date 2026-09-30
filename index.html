@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="AffordanceGrasp-R1: reasoning-driven affordance segmentation for robotic grasping." />
-  <title>AffordanceGrasp-R1</title>
+  <meta name="description" content="AffordanceGrasp-R1: Chain-of-Thought-Guided Multimodal Large Language Model with Reinforcement Learning for Affordance Grasping." />
+  <title>AffordanceGrasp-R1 | CoT-Guided Affordance Grasping</title>
   <link rel="stylesheet" href="static/css/index.css" />
 </head>
 <body>
@@ -23,11 +23,11 @@
       <div class="wrap hero-inner">
         <p class="eyebrow">Reasoning &middot; Affordance &middot; 6-DoF Grasping</p>
         <h1>AffordanceGrasp-R1</h1>
-        <p class="subtitle">Leveraging Reasoning-Based Affordance Segmentation<br class="desktop" /> with Reinforcement Learning for Robotic Grasping</p>
+        <p class="subtitle">Chain-of-Thought-Guided Multimodal Large Language Model<br class="desktop" /> with Reinforcement Learning for Affordance Grasping</p>
 
         <div class="links" aria-label="Project links">
           <a class="pill" href="https://arxiv.org/abs/2602.03547" target="_blank" rel="noreferrer"><span>arXiv</span><b>2602.03547</b></a>
-          <a class="pill" href="static/pdf/AffordanceGraspR1_ICML2026.pdf" target="_blank"><span>PDF</span><b>Paper</b></a>
+          <a class="pill" href="static/pdf/AffordanceGraspR1_TRO2026.pdf" target="_blank"><span>PDF</span><b>Paper</b></a>
           <span class="pill pill-muted" aria-label="Code coming soon"><span>Code</span><b>Coming soon</b></span>
         </div>
       </div>
@@ -51,14 +51,13 @@
 
     <section class="section section-tint" id="framework">
       <div class="wrap">
-        <h2>Framework</h2>
+        <h2>Framework Overview</h2>
         <figure class="paper-card figure-wide">
           <img
-            src="https://arxiv.org/html/2602.03547v1/overview.png"
-            data-fallback="static/images/framework_clean.png"
+            src="static/images/overview_new.png"
             alt="Overview of the AffordanceGrasp-R1 framework"
           />
-          <figcaption class="framework-caption">The framework consists of three modules. First, the MLLM is initialized with Chain-of-Thought cold-start data and further optimized with reinforcement learning to produce a reasoning process together with a bounding box and point prompt. These spatial prompts guide the LoRA-adapted SAM 2 segmentation module to generate an instruction-conditioned affordance mask. Finally, the grasping module generates 6-DoF candidates from the full-scene point cloud and selects the optimal pose through mask-guided filtering and 3D IoU matching.</figcaption>
+          <figcaption class="framework-caption">Overview of AffordanceGrasp-R1. A MLLM serves as reasoning model providing precise bounding box and points after thinking process, while SAM 2 with LoRA fine-tuning further performs affordance segmentation. The resulting mask guides object point cloud selection, and the optimal grasp pose is chosen from candidate grasps.</figcaption>
         </figure>
       </div>
     </section>
@@ -195,7 +194,7 @@
         <h2>BibTeX</h2>
         <div class="bib">
 <pre id="bibtex">@article{zhou2026affordancegraspr1,
-  title   = {AffordanceGrasp-R1: Leveraging Reasoning-Based Affordance Segmentation with Reinforcement Learning for Robotic Grasping},
+  title   = {AffordanceGrasp-R1: Chain-of-Thought-Guided Multimodal Large Language Model with Reinforcement Learning for Affordance Grasping},
   author  = {Zhou, Dingyi and He, Mu and Fang, Zhuowei and Yao, Xiangtong and Liu, Yinlong and Knoll, Alois and Cao, Hu},
   journal = {arXiv preprint arXiv:2602.03547},
   year    = {2026}

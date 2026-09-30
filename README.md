@@ -10,6 +10,7 @@ Three page directions are included:
 - `index.html`: Version 1, the original project page
 - `version-2/index.html`: Version 2, a light editorial research layout
 - `version-3/index.html`: Version 3, a dark robotics-lab console layout
+- `version-4/index.html`: Version 4, the V2 editorial layout with V1 experiments and V3 task switching
 
 If Python is available:
 ```bash
@@ -26,6 +27,7 @@ then visit `http://localhost:8000`.
 - `static/pdf/AffordanceGraspR1_TRO2026.pdf`: latest local paper PDF
 - `version-2/`: editorial variant with Easy/Hard video filtering
 - `version-3/`: lab-console variant with per-task instruction switching
+- `version-4/`: hybrid variant with full experiment figures and compact Easy/Hard task cards
 
 ## Before publishing
 The page uses high-resolution figures served by the paper's arXiv HTML page and

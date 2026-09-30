@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AffordanceGrasp-R1: Chain-of-Thought-Guided Multimodal Large Language Model with Reinforcement Learning for Affordance Grasping." />
+  <title>AffordanceGrasp-R1 | Lab Console Version</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="grid-noise" aria-hidden="true"></div>
+  <header class="console-nav">
+    <a class="console-brand" href="#top"><i></i><span>AffordanceGrasp-R1</span><em>LAB / 2026</em></a>
+    <nav aria-label="Primary navigation">
+      <a href="#system">System</a><a href="#evidence">Evidence</a><a href="#robot">Robot Lab</a><a href="#paper">Paper</a>
+    </nav>
+    <div class="version-nav"><a href="../">V1</a><a href="../version-2/">V2</a><b>V3</b></div>
+  </header>
+
+  <main id="top">
+    <section class="hero deck">
+      <div class="hero-copy">
+        <p class="terminal-line"><span>●</span> SYSTEM ONLINE · AFFORDANCE REASONING</p>
+        <h1><span>Affordance</span><br />Grasp-R1</h1>
+        <p class="hero-title">Chain-of-Thought-Guided Multimodal Large Language Model with Reinforcement Learning for Affordance Grasping</p>
+        <div class="hero-actions">
+          <a href="https://arxiv.org/abs/2602.03547" target="_blank" rel="noreferrer"><span>ARXIV</span><b>2602.03547 ↗</b></a>
+          <a href="../static/pdf/AffordanceGraspR1_TRO2026.pdf" target="_blank"><span>DOCUMENT</span><b>OPEN PDF ↗</b></a>
+          <span class="disabled"><span>REPOSITORY</span><b>COMING SOON</b></span>
+        </div>
+      </div>
+      <div class="hero-screen">
+        <div class="screen-bar"><span>LIVE PIPELINE / INPUT → ACTION</span><b>2×</b></div>
+        <img src="../static/images/teaser_robot.png" alt="Affordance grounding and robotic grasping examples" />
+        <div class="screen-status"><span><i></i> REASONING READY</span><span><i></i> MASK READY</span><span><i></i> GRASP READY</span></div>
+      </div>
+      <div class="scroll-cue">SCROLL TO INSPECT <span>↓</span></div>
+    </section>
+
+    <section class="metrics deck" aria-label="Key metrics">
+      <article><small>BENCHMARK</small><strong>66.7<em>gIoU</em></strong><span>Average main subsets</span></article>
+      <article><small>BENCHMARK</small><strong>65.9<em>cIoU</em></strong><span>Average main subsets</span></article>
+      <article><small>REAL ROBOT / EASY</small><strong>80<em>%</em></strong><span>Zero-shot success</span></article>
+      <article><small>REAL ROBOT / HARD</small><strong>72<em>%</em></strong><span>Implicit instruction success</span></article>
+    </section>
+
+    <section class="section deck" id="system">
+      <header class="section-header">
+        <div><span class="section-index">01</span><p>SYSTEM ARCHITECTURE</p></div>
+        <h2>Reasoning is the interface<br />between language and contact.</h2>
+      </header>
+      <div class="system-grid">
+        <article class="system-copy">
+          <span class="module-id">ABSTRACT / 000</span>
+          <p>Affordance segmentation is crucial for bridging visual perception and robotic manipulation, yet existing Vision–Language Models (VLMs) struggle to align 3D object geometry with the semantic intent of complex grasping instructions due to limited structured reasoning capabilities. We introduce AffordanceGrasp-R1, a reasoning-driven affordance segmentation framework for robotic grasping that combines a chain-of-thought (CoT) cold-start strategy with reinforcement learning to enhance deduction and spatial grounding. In addition, we redesign the grasping pipeline to be more context-aware by generating grasp candidates from the global scene point cloud and subsequently filtering them using instruction-conditioned affordance masks. Extensive experiments demonstrate that AffordanceGrasp-R1 consistently outperforms state-of-the-art (SOTA) methods on benchmark datasets, and real-world robotic grasping evaluations further validate its robustness and generalization under complex language-conditioned manipulation scenarios.</p>
+        </article>
+        <figure class="system-figure">
+          <div class="panel-label"><span>FRAMEWORK / FIG.04</span><b>FULL PIPELINE</b></div>
+          <img src="../static/images/overview_new.png" alt="Overview of AffordanceGrasp-R1" />
+          <figcaption>Reasoning generates box and point prompts; segmentation resolves the affordance mask; full-scene grasp candidates are filtered to select the optimal pose.</figcaption>
+        </figure>
+      </div>
+      <div class="module-grid">
+        <article><span>01 / REASON</span><b>MLLM + CoT + RL</b><p>Decode functional intent and emit precise spatial prompts.</p><i>TEXT + RGB → BOX + POINT</i></article>
+        <article><span>02 / SEGMENT</span><b>SAM 2 + LoRA</b><p>Turn coarse prompts into a fine-grained affordance mask.</p><i>BOX + POINT → MASK</i></article>
+        <article><span>03 / GRASP</span><b>GA-Grasp + 3D IoU</b><p>Preserve global geometry and rank feasible 6-DoF candidates.</p><i>SCENE + MASK → POSE</i></article>
+      </div>
+    </section>
+
+    <section class="section evidence-section" id="evidence">
+      <div class="deck">
+        <header class="section-header">
+          <div><span class="section-index">02</span><p>EXPERIMENTAL EVIDENCE</p></div>
+          <h2>Broad gains.<br />Visible grounding.</h2>
+        </header>
+        <div class="evidence-grid">
+          <figure class="radar-panel">
+            <div class="panel-label"><span>METRICS / 8 SUBSETS</span><b>OURS VS. AFFORDANCENET</b></div>
+            <img src="../static/images/radar_comparison.svg" alt="Radar-chart benchmark comparison" />
+            <figcaption>AffordanceGrasp-R1 expands the performance envelope across both overlap metrics.</figcaption>
+          </figure>
+          <div class="visual-stack">
+            <figure><div class="panel-label"><span>QUALITATIVE / MAIN</span><b>FUNCTIONAL REGION</b></div><img src="../static/images/reasoning_compare.png" alt="Qualitative affordance segmentation results" /><figcaption>Precise functional grounding on diverse objects and scenes.</figcaption></figure>
+            <figure><div class="panel-label"><span>LANGUAGE / EASY + HARD</span><b>SEMANTIC INTENT</b></div><img src="../static/images/reasoning_examples.png" alt="Easy and hard instruction examples" /><figcaption>Direct and implicit instructions evaluate semantic reasoning.</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section deck robot-lab" id="robot">
+      <header class="section-header robot-heading">
+        <div><span class="section-index">03</span><p>REAL-WORLD ROBOT LAB</p></div>
+        <h2>Ten objects.<br />Two language regimes.</h2>
+      </header>
+      <div class="lab-toolbar">
+        <p>Switch the instruction regime globally or per task. The most visible row loops automatically at 2× speed.</p>
+        <div class="mode-switch" role="group" aria-label="Instruction mode"><button class="is-active" data-mode="easy">EASY / DIRECT</button><button data-mode="hard">HARD / IMPLICIT</button></div>
+      </div>
+      <div class="task-grid" id="taskGrid"></div>
+    </section>
+
+    <section class="section paper-section" id="paper">
+      <div class="deck paper-grid">
+        <div>
+          <span class="section-index">04</span>
+          <p class="paper-kicker">PAPER / CITATION</p>
+          <h2>Inspect the method.<br />Reuse the citation.</h2>
+          <div class="paper-links"><a href="../static/pdf/AffordanceGraspR1_TRO2026.pdf" target="_blank">DOWNLOAD PDF ↗</a><a href="https://arxiv.org/abs/2602.03547" target="_blank" rel="noreferrer">ARXIV PAGE ↗</a></div>
+        </div>
+        <div class="bib-console">
+          <div class="panel-label"><span>CITATION.BIB</span><button id="copyBtn">COPY</button></div>
+<pre id="bibtex">@article{zhou2026affordancegraspr1,
+  title   = {AffordanceGrasp-R1: Chain-of-Thought-Guided Multimodal Large Language Model with Reinforcement Learning for Affordance Grasping},
+  author  = {Zhou, Dingyi and He, Mu and Fang, Zhuowei and Yao, Xiangtong and Liu, Yinlong and Knoll, Alois and Cao, Hu},
+  journal = {arXiv preprint arXiv:2602.03547},
+  year    = {2026}
+}</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="deck"><span><i></i> AFFORDANCEGRASP-R1 / PROJECT PAGE</span><b>REASON → SEGMENT → GRASP</b><a href="#top">RETURN TO TOP ↑</a></div></footer>
+  <script src="script.js"></script>
+</body>
+</html>

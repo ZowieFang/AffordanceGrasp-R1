@@ -6,11 +6,13 @@ framework, benchmark experiments, and real-robot videos.
 ## Preview
 You can directly double-click `index.html`.
 
-Three page directions are included:
+Six page directions are included:
 - `index.html`: Version 1, the original project page
 - `version-2/index.html`: Version 2, a light editorial research layout
 - `version-3/index.html`: Version 3, a dark robotics-lab console layout
 - `version-4/index.html`: Version 4, the V2 editorial layout with V1 experiments and V3 task switching
+- `version-5/index.html`: Version 5, a refined studio layout with tabbed experimental results and scroll progress
+- `version-6/index.html`: Version 6, a warm research-deck layout with compact experiment cards and figure lightboxes
 
 If Python is available:
 ```bash
@@ -28,6 +30,8 @@ then visit `http://localhost:8000`.
 - `version-2/`: editorial variant with Easy/Hard video filtering
 - `version-3/`: lab-console variant with per-task instruction switching
 - `version-4/`: hybrid variant with full experiment figures and compact Easy/Hard task cards
+- `version-5/`: studio variant with focused, tabbed result browsing
+- `version-6/`: research-deck variant with a compact result overview and click-to-expand figures
 
 ## Before publishing
 The page uses high-resolution figures served by the paper's arXiv HTML page and

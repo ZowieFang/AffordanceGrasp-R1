@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AffordanceGrasp-R1: Chain-of-Thought-Guided Multimodal Large Language Model with Reinforcement Learning for Affordance Grasping." />
+  <title>AffordanceGrasp-R1 | Research Deck</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top"><span>AG</span> AffordanceGrasp-R1</a>
+    <nav aria-label="Primary navigation">
+      <a href="#abstract">Abstract</a>
+      <a href="#method">Method</a>
+      <a href="#results">Results</a>
+      <a href="#robot">Robot</a>
+    </nav>
+    <div class="version-nav" aria-label="Page versions">
+      <a href="../">V1</a><a href="../version-4/">V4</a><a href="../version-5/">V5</a><b>V6</b>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero shell">
+      <div class="hero-copy">
+        <p class="kicker"><span></span> TRO 2026 · Research Deck</p>
+        <h1>Affordance<br />Grasp<span>-R1</span></h1>
+        <p class="hero-subtitle">Chain-of-Thought-Guided Multimodal Large Language Model with Reinforcement Learning for Affordance Grasping</p>
+        <p class="hero-summary">Reason over language, localize functional object regions, and convert affordance understanding into executable 6-DoF grasps.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="https://arxiv.org/abs/2602.03547" target="_blank" rel="noreferrer">Read on arXiv <span>↗</span></a>
+          <a class="button" href="../static/pdf/AffordanceGraspR1_TRO2026.pdf" target="_blank">Open paper <span>↗</span></a>
+        </div>
+      </div>
+      <figure class="hero-visual">
+        <div class="visual-label"><span>01</span> Benchmark profile</div>
+        <img src="../static/images/radar_comparison.svg" alt="Radar comparison of AffordanceGrasp-R1 and AffordanceNet" />
+        <figcaption>Consistent gains across gIoU and cIoU benchmarks, including novel-object and reasoning-focused subsets.</figcaption>
+      </figure>
+    </section>
+
+    <section class="signal-strip" aria-label="Key results">
+      <div class="shell signals">
+        <div><b>66.7 / 65.9</b><span>Average gIoU / cIoU</span></div>
+        <div><b>80%</b><span>Easy-instruction grasp success</span></div>
+        <div><b>72%</b><span>Hard-instruction grasp success</span></div>
+        <div><b>3 modules</b><span>Reason · Segment · Grasp</span></div>
+      </div>
+    </section>
+
+    <section class="section shell" id="abstract">
+      <div class="section-heading">
+        <p>01 · Motivation</p>
+        <h2>From semantic intent<br />to physical action.</h2>
+      </div>
+      <div class="abstract-layout">
+        <p class="abstract-text">Affordance segmentation is crucial for bridging visual perception and robotic manipulation, yet existing Vision–Language Models (VLMs) struggle to align 3D object geometry with the semantic intent of complex grasping instructions due to limited structured reasoning capabilities. We introduce AffordanceGrasp-R1, a reasoning-driven affordance segmentation framework for robotic grasping that combines a chain-of-thought (CoT) cold-start strategy with reinforcement learning to enhance deduction and spatial grounding. In addition, we redesign the grasping pipeline to be more context-aware by generating grasp candidates from the global scene point cloud and subsequently filtering them using instruction-conditioned affordance masks. Extensive experiments demonstrate that AffordanceGrasp-R1 consistently outperforms state-of-the-art (SOTA) methods on benchmark datasets, and real-world robotic grasping evaluations further validate its robustness and generalization under complex language-conditioned manipulation scenarios.</p>
+        <aside class="contribution-list">
+          <article><span>01</span><div><h3>Structured reasoning</h3><p>CoT cold start stabilizes the reasoning routine before reinforcement learning.</p></div></article>
+          <article><span>02</span><div><h3>Precise grounding</h3><p>Bounding-box and point prompts guide a LoRA-adapted SAM 2 segmenter.</p></div></article>
+          <article><span>03</span><div><h3>Context-aware grasping</h3><p>Full-scene candidates preserve global geometry before mask-guided filtering.</p></div></article>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section method-section" id="method">
+      <div class="shell">
+        <div class="section-heading compact">
+          <p>02 · Method</p>
+          <h2>One interpretable pipeline.<br />Three specialized modules.</h2>
+        </div>
+        <figure class="method-figure">
+          <img src="../static/images/overview_new.png" alt="Overview of AffordanceGrasp-R1" />
+          <figcaption>Overview of AffordanceGrasp-R1. A MLLM serves as reasoning model providing precise bounding box and points after thinking process, while SAM 2 with LoRA fine-tuning further performs affordance segmentation. The resulting mask guides object point cloud selection, and the optimal grasp pose is chosen from candidate grasps.</figcaption>
+        </figure>
+        <div class="stage-grid">
+          <article><b>01</b><span>Reasoning module</span><p>Interprets the instruction and predicts spatial prompts through structured multimodal reasoning.</p></article>
+          <article><b>02</b><span>Segmentation module</span><p>Turns box and point prompts into an instruction-conditioned affordance mask.</p></article>
+          <article><b>03</b><span>Grasping module</span><p>Generates full-scene candidates and selects a feasible pose with mask-guided 3D matching.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="results">
+      <div class="section-heading experiment-heading">
+        <p>03 · Experimental Results</p>
+        <h2>Qualitative results across<br />datasets and instructions.</h2>
+        <p class="heading-note">The model is evaluated across HANDAL, GraspNet, and 3DOI, including unseen objects and queries that require functional reasoning about object parts.</p>
+      </div>
+      <div class="figure-stack">
+        <figure class="paper-card">
+          <div class="figure-label"><span>01</span> Main subsets</div>
+          <img data-lightbox src="https://arxiv.org/html/2602.03547v1/Visual_affgrasp_r1_new.png" data-fallback="../static/images/reasoning_compare.png" alt="Qualitative comparison on the main affordance segmentation subsets" />
+          <figcaption>Qualitative comparison on the main affordance segmentation subsets.</figcaption>
+        </figure>
+        <figure class="paper-card">
+          <div class="figure-label"><span>02</span> Reasoning subsets</div>
+          <img data-lightbox src="https://arxiv.org/html/2602.03547v1/reasoning_Visual_affgrasp_r1_new.png" data-fallback="../static/images/reasoning_compare.png" alt="Qualitative comparison on reasoning-based affordance segmentation subsets" />
+          <figcaption>AffordanceGrasp-R1 maintains sharper functional grounding under compositional instructions.</figcaption>
+        </figure>
+        <figure class="paper-card">
+          <div class="figure-label"><span>03</span> Easy and hard prompts</div>
+          <img data-lightbox src="https://arxiv.org/html/2602.03547v1/easy_hard_reasoning.png" data-fallback="../static/images/reasoning_examples.png" alt="Easy and hard reasoning-based instruction examples" />
+          <figcaption>Representative image-instruction pairs used in the real-world evaluation.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section robot-section" id="robot">
+      <div class="shell">
+        <div class="section-heading row-heading light">
+          <div><p>04 · Real robot</p><h2>Twenty trials.<br />Two instruction regimes.</h2></div>
+          <div class="mode-switch" role="group" aria-label="Instruction mode">
+            <button class="is-active" data-mode="easy">Easy · Direct</button>
+            <button data-mode="hard">Hard · Implicit</button>
+          </div>
+        </div>
+        <p class="robot-lead">Zero-shot grasping with a KUKA LBR iiwa R820, Robotiq 2F-85 gripper, and eye-in-hand Intel RealSense D455. Switch the instruction regime globally or for an individual task; the most visible row plays automatically at 2× speed.</p>
+        <div class="task-grid" id="taskGrid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section shell citation-section" id="citation">
+      <div class="section-heading compact"><p>05 · Citation</p><h2>Build on the work.</h2></div>
+      <div class="citation-card">
+<pre id="bibtex">@article{zhou2026affordancegraspr1,
+  title   = {AffordanceGrasp-R1: Chain-of-Thought-Guided Multimodal Large Language Model with Reinforcement Learning for Affordance Grasping},
+  author  = {Zhou, Dingyi and He, Mu and Fang, Zhuowei and Yao, Xiangtong and Liu, Yinlong and Knoll, Alois and Cao, Hu},
+  journal = {arXiv preprint arXiv:2602.03547},
+  year    = {2026}
+}</pre>
+        <button id="copyBtn" type="button">Copy BibTeX</button>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="image-dialog" id="imageDialog" aria-label="Expanded experimental result">
+    <button class="dialog-close" id="dialogClose" type="button" aria-label="Close expanded figure">Close ×</button>
+    <img id="dialogImage" alt="" />
+    <p id="dialogCaption"></p>
+  </dialog>
+
+  <footer><div class="shell"><b>AffordanceGrasp-R1 · Research Deck</b><span>Reason · Segment · Grasp</span><a href="#top">Back to top ↑</a></div></footer>
+  <script src="script.js"></script>
+</body>
+</html>
